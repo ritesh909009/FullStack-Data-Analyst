@@ -1,0 +1,45 @@
+--Challenge 1:  How to select UNIQUE records froma a table using SQL Query?
+
+CREATE DATABASE SQL_INTERVIEW;
+USE DATABASE SQL_INTERVIEW;
+
+CREATE TABLE EMPLOYEE(
+                    EMPLOYEE_ID NUMBER(6,0),
+                    NAME VARCHAR(20),
+                    SALARY NUMBER(8,2));
+                    
+INSERT INTO EMPLOYEE VALUES (100,'Jennifer',4400),
+(100,'Jennifer',4400),
+(101,'Michael',13000),
+(101,'Michael',13000),
+(101,'Michael',13000),
+(102,'Pat',6000),
+(102,'Pat',6000),
+(103,'Den',11000);
+select * FROM EMPLOYEE
+
+--  How to select UNIQUE records froma a table using A SQL Query?
+
+SELECT EMPLOYEE_ID,NAME,SALARY
+FROM EMPLOYEE
+GROUP BY 1,2,3
+
+--OR
+
+select distinct * from employee
+======================================================================================
+
+--Challenge 2:  How to Delete DUPLICATE records from a table using a SQL query?
+
+#CREATE BACKUP TABLE OF EMPLOYEE WITH UNIQUE RECORDS OF TABLE
+CREATE TABLE EMPLOYEE_BCKP AS SELECT DISTINCT * FROM EMPLOYEE;
+
+SELECT * FROM EMPLOYEE_BCKP
+# EMPTY ORIGNAL TABLE
+TRUNCATE TABLE EMPLOYEE;
+#INSERT UNIQUE RECORDS FROM BACKUP TABLE INTO MAIN TABLE
+INSERT INTO EMPLOYEE
+SELECT DISTINCT * FROM EMPLOYEE_BCKP
+# DROP BACKUP TABLE
+DROP TABLE EMPLOYEE_BCKP
+SELECT * FROM EMPLOYEE
